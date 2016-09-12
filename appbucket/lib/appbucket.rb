@@ -1,5 +1,5 @@
 require "appbucket/version"
-require "build"
+require "appbucket/build"
 require "ipa_analyzer"
 
 module Appbucket

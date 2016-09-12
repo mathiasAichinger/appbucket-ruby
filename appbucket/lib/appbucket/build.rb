@@ -1,4 +1,3 @@
-require "appbucket"
 require "rest-client"
 require "colorize"
 
