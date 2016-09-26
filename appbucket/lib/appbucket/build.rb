@@ -5,11 +5,14 @@ module Appbucket
   
   class Build
 
-    # Class methods
+    #-- Class methods
 
-    def self.api_url
-      "#{Appbucket.base_url}/builds"
-    end
+    # Fetches all or a specific build from the Appbucket.host
+    #
+    # *Parameter*:
+    # - +id+ (optional) An id to only fetch a specific build. Will return all builds if +nil+
+    #
+    # *Returns*: A list of builds. I +id+ is specified it will return a list containing a single object.
   	def self.get(id = nil)
       
       url = Appbucket::Build.api_url
@@ -28,8 +31,14 @@ module Appbucket
       return build_list
   	end
   	
-    # post a Build object to 'app-bucket'
-    # returns the uploaded Build object
+    # Post a Build object to Appbucket.host
+    #
+    # *Note*: In order to successfully upload the _ipa_ file you must specify the Build.file_path,
+    # the Build.identifier and the Build.version.
+    #
+    # *Parameter*:
+    # - +build+: A build to upload
+    # *Returns*: The uploaded Build object
   	def self.post(build)
 
       begin
@@ -56,7 +65,14 @@ module Appbucket
       return Appbucket::Build.create_from_json_api(JSON.parse(response.to_s)["data"])
   	end
 
-  	# Instance methods
+    private
+
+    def self.api_url
+      "#{Appbucket.base_url}/builds"
+    end
+
+    #-- Instance methods
+    public
 
     attr_reader :version, 
                 :short_version, 
