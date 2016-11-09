@@ -35,7 +35,7 @@ module Appbucket
   	# - +notes+ (optional): Additional notes to the build file
   	#
   	# *Returns*: +true+ on success else +false+
-  	def self.uploadIPA(ipaPath, notes = "")
+  	def self.uploadIPA(ipaPath, notes = "", category = "")
   		begin
   			ipa_analyzer = IpaAnalyzer::Analyzer.new(ipaPath)
   			ipa_analyzer.open!
@@ -51,7 +51,8 @@ module Appbucket
   		build = Appbucket::Build.new(version: bundle_version, 
   			file_path:ipaPath,
   			identifier: bundle_identifier,
-  			notes: notes)
+  			notes: notes,
+        category: category)
   		result = Appbucket::Build.post(build)
 
   		return false unless result else true

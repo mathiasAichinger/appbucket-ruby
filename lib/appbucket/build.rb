@@ -53,7 +53,9 @@ module Appbucket
                    :binary_file => file,
                    :notes => build.notes,
                    :identifier => build.identifier,
-                   :multipart => true}
+                   :category_name => build.category,
+                   :multipart => true
+                 }
       begin
         response = RestClient::post url, parameter  
       rescue Exception => e
@@ -82,7 +84,8 @@ module Appbucket
                 :manifest_url,
                 :processed,
                 :file_path,
-                :identifier
+                :identifier,
+                :category
 
     def self.create_from_json_api(jsonApi)
       return Appbucket::Build.new(version: jsonApi["attributes"]["version"],
@@ -104,6 +107,7 @@ module Appbucket
       @processed = options[:processed]
       @identifier = options[:identifier] # mandatory if uploading to reference the app for the build
       @file_path = options[:file_path]
+      @category = options[:category]
     end
 
   end

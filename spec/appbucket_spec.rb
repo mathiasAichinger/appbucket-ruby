@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Appbucket do
-  Appbucket.host "localhost:3000"
+  Appbucket.host "localhost"
 
   it 'has a version number' do
     expect(Appbucket::VERSION).not_to be nil
@@ -9,7 +9,7 @@ describe Appbucket do
 
   it 'uploads a build with simplified interface' do
     ipa_path = "./spec/resources/runtasticPRO.ipa"
-    expect(Appbucket.uploadIPA(ipa_path)).to be true
+    expect(Appbucket.uploadIPA(ipa_path, "test", "test")).to be true
   end
 
   it 'lists the available builds' do
