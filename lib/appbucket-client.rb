@@ -32,7 +32,8 @@ module Appbucket
   	#
   	# *Parameter*:
   	# - +ipaPath+: Fielpath to the _ipa-File_ to upload
-  	# - +notes+ (optional): Additional notes to the build file
+  	# - +notes+ (optional): Additional notes for the build file
+    # - +category+ (optional): Additional category of the build file
   	#
   	# *Returns*: +true+ on success else +false+
   	def self.uploadIPA(ipaPath, notes = "", category = "")
@@ -55,7 +56,7 @@ module Appbucket
         category: category)
   		result = Appbucket::Build.post(build)
 
-  		return false unless result else true
+      return result != nil
   	end
 
 	private
